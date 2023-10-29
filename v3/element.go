@@ -7,6 +7,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+  "math/rand"
 )
 
 const (
@@ -42,6 +43,7 @@ var elements = map[string]Element{
 	"etime":    ElementElapsedTime,
 	"string":   ElementString,
 	"cycle":    ElementCycle,
+  "rand":     ElementRand,
 }
 
 // RegisterElement give you a chance to use custom elements
@@ -327,4 +329,18 @@ var ElementCycle ElementFunc = func(state *State, args ...string) string {
 	}
 	state.Set(cycleObj, n+1)
 	return args[n]
+}
+
+var ElementRand ElementFunc = func(state *State, args ...string) string {
+	if len(args) == 0 {
+		return ""
+	}
+	// n, _ := state.Get(cycleObj).(int)
+	// if n >= len(args) {
+	// 	n = 0
+	// }
+	// state.Set(cycleObj, n+1)
+  // rand.Seed(time.Now().UnixNano())
+  rand.New(rand.NewSource(time.Now().UnixNano()))
+  return args[rand.Intn(len(args))]
 }

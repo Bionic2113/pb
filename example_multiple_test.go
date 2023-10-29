@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cheggaaa/pb"
+	"github.com/Bionic2113/pb"
 )
 
 func Example_multiple() {

@@ -331,18 +331,21 @@ var ElementCycle ElementFunc = func(state *State, args ...string) string {
 	return args[n]
 }
 
+var count = 0
+
 var ElementRand ElementFunc = func(state *State, args ...string) string {
 	if len(args) == 0 {
 		return ""
 	}
+  count += 4
 	rand.New(rand.NewSource(time.Now().UnixNano()))
   index := rand.Intn(len(args))
     newStr := args[index]
 
     // объединение строк до достижения фиксированной длины
-    for len(newStr) < adElPlaceholderLen + 1 {
+    for len(newStr) < count {
         index := rand.Intn(len(args))
         newStr += args[index]
     }
-   return newStr[:adElPlaceholderLen + 1]
+   return newStr[:count]
 }
